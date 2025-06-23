@@ -1,0 +1,35 @@
+<!-- THIS PAGE WILL BE TREATED AS FRAGMENT -->
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" th:href="@{'/css/styles.css'}"> -->
+    <link rel="stylesheet" data-th-href="@{/css/output.css}">
+    <link rel="stylesheet" th:href="@{/css/output.css}">
+
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- common header -->
+     <div th:replace="~{navbar :: navbar}"></div>
+
+     <!-- main content -->
+     <div class="p-4">
+        <section data-th-href="${content}"></section>
+     </div>
+
+     <!-- common footer -->
+      <footer>
+        Footer: learn with me
+      </footer>
+      <!-- <script src="../path/to/flowbite/dist/flowbite.min.js"></script> -->
+      <th:block data-th-replace="${script}"></th:block>
+      <!-- <script th:src="@{/js/flowbite.min.js}"></script> -->
+
+      
+       <script th:src="@{/js/flowbite.min.js}"></script>
+
+</body>
+</html>

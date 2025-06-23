@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/output.css}">
+
+    <title>Document</title>
+</head>
+<body>
+    <!-- <h1>this is about page</h1> -->
+    <!-- using fragment -->
+    <!-- <div th:insert="~{fragement :: parent}"> </div> -->
+     <!-- we can pass here variables, html, id wise section -->
+    <div th:replace="~{navbar :: navbar}"></div>
+
+</div>
+</body>
+</html>
