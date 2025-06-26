@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link data-th-href="@{'src/output.css'}" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" href="/css/styles.css"> -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+    <title>Document</title>
+</head>
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+    <div>
+        <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+             voluptas accusantium, iusto inventore labore voluptate quos amet ipsam explicabo 
+             repellat iste corrupti, 
+            aspernatur facilis quasi quo nemo nesciunt optio tempora!</h1>
+
+            <p> Repo link: <span th:text="${githubrepo}"></span> </p>
+            <!-- html friendly below is better -->
+            <a data-th-href="${githubrepo}">click here to open</a>
+    </div>
+
+      <h1 class="text-3xl font-bold underline">
+    welcome to login page
+    </h1>    
+</body>
+</html>

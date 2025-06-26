@@ -47,4 +47,27 @@ public class PageController {
 
         return "contact";
     }
+
+
+         @RequestMapping("/login")
+    public String login(Model model){
+        System.out.println("in login page controller");
+
+        //sending data to view
+        // model.addAttribute("githubrepo", "https://github.com/sarimbinasif");
+
+        return "login";
+    }
+
+
+         @RequestMapping("/signup")
+    public String signup(Model model){
+        System.out.println("in signup page controller");
+
+        //sending data to view
+        // model.addAttribute("githubrepo", "https://github.com/sarimbinasif");
+
+        return "signup";
+
+    }
 }
