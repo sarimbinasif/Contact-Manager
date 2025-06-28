@@ -6,6 +6,8 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -47,6 +49,7 @@ public class User {
     private boolean emailverified=false;
     private boolean phoneVerfied=false;
 
+    @Enumerated(value = EnumType.STRING)
     // self signup, google, github etc
     private Providers provider= Providers.SELF;
     private String providerUserId;
@@ -55,6 +58,11 @@ public class User {
     // cascade type all , means user delete pe sary contacts delete 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Contact> contacts = new ArrayList<>();
+
+    public void setPhoneVerified(boolean phoneNumber2) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setPhoneVerified'");
+    }
 
     
 }
