@@ -1,32 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link data-th-href="@{'src/output.css'}" rel="stylesheet"> -->
-    <!-- <link rel="stylesheet" href="/css/styles.css"> -->
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 
     <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
-    <title>Document</title>
+    <title>Signup</title>
 </head>
-<body>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
   <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
-    <div>
-        <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-             voluptas accusantium, iusto inventore labore voluptate quos amet ipsam explicabo 
-             repellat iste corrupti, 
-            aspernatur facilis quasi quo nemo nesciunt optio tempora!</h1>
 
-            <p> Repo link: <span th:text="${githubrepo}"></span> </p>
-            <!-- html friendly below is better -->
-            <a data-th-href="${githubrepo}">click here to open</a>
+  <div id="content" class="pt-20 flex justify-center px-4 sm:px-6 lg:px-8">
+    <!-- <div class="w-full max-w-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 p-6"> -->
+      <div class="w-full max-w-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 border-t-4 border-t-blue-500 rounded-lg shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 p-6">
+      <div th:replace="~{navbar :: navbar}"></div>
+
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+        Signup Here
+      </h5>
+      <p class="font-normal text-gray-700 dark:text-gray-400">
+        start managing your contacts!!
+      </p>
+
+      <!-- FORM -->
+      <form data-th-action="@{'/do-signup'}" method="post" data-th-object="${userForm}" class="mt-5">
+        <!-- USERNAME -->
+        <div class="mb-5">
+          <label for="text" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
+          <input type="text" id="name" th:field="*{name}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter your username" required />
+        </div>
+
+        <!-- EMAIL -->
+        <div class="mb-5">
+          <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+          <input type="email" id="email" th:field="*{email}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@gmail.com" required />
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="mb-5">
+          <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+          <input  th:field="*{password}" type="text" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter your password" required />
+        </div>
+
+        <!-- PHONE -->
+        <div class="mb-5">
+          <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact Number</label>
+          <input type="text" id="phone" th:field="*{phoneNumber}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter your phone number" required />
+        </div>
+
+        <!-- ABOUT -->
+        <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Write something about yourself</label>
+        <textarea id="message" rows="4" th:field="*{about}" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
+
+        <!-- BUTTONS -->
+        <div class="mt-7 mb-3 flex justify-center space-x-4">
+          <!-- Submit -->
+          <button type="submit" class="relative inline-flex items-center justify-center p-0.5 text-base font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-blue-500 to-blue-700 group-hover:from-blue-600 group-hover:to-blue-800 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+            <span class="relative px-6 py-3 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
+              Submit
+            </span>
+          </button>
+
+          <!-- Reset -->
+          <button type="reset" class="relative inline-flex items-center justify-center p-0.5 text-base font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-400 to-red-600 group-hover:from-red-500 group-hover:to-red-700 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-red-200 dark:focus:ring-red-800">
+            <span class="relative px-6 py-3 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
+              Reset
+            </span>
+          </button>
+        </div>
+      </form>
     </div>
-
-      <h1 class="text-3xl font-bold underline">
-   welcome to Signup page
-    </h1>
-
-    
+  </div>
 </body>
 </html>

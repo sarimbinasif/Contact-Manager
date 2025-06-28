@@ -40,6 +40,7 @@ public class User {
     @Column(length=1000)
     private String about;
     private String profilePic;
+    private String phoneNumber;
     
     //for verfication 
     private boolean enabled=false;
