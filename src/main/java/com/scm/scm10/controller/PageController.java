@@ -12,9 +12,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.scm.scm10.entities.User;
 import com.scm.scm10.forms.UserForm;
+import com.scm.scm10.helpers.Message;
+import com.scm.scm10.helpers.MessageType;
 import com.scm.scm10.services.UserService;
 
 import ch.qos.logback.core.joran.spi.HttpUtil.RequestMethod;
+import jakarta.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -131,7 +134,7 @@ public class PageController {
 // }
 
     @PostMapping("/do-signup")
-public String processSignup(@ModelAttribute UserForm userForm,
+public String processSignup(@ModelAttribute UserForm userForm,HttpSession session,
                             @RequestParam("profilePic") MultipartFile file) {
     System.out.println("in process signup function");
     // System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
@@ -184,8 +187,11 @@ user.setProfilePic(profilePicPath);
 
     User savedUser = userService.saveUser(user);
     System.out.println(savedUser);
+    Message message = Message.builder().content("Resgistration Succesful").type(MessageType.green).build();
 
-    return "redirect:/login"; // or wherever you want to go after signup
+    session.setAttribute("message", message);
+
+    return "redirect:/signup"; // or wherever you want to go after signup
 }
 
 

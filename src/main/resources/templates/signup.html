@@ -16,7 +16,7 @@
     <!-- <div class="w-full max-w-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 p-6"> -->
       <div class="w-full max-w-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 border-t-4 border-t-blue-500 rounded-lg shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 p-6">
       <div th:replace="~{navbar :: navbar}"></div>
-
+        <div th:replace="~{message :: messagebox}"></div>
       <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
         Signup Here
       </h5>
@@ -41,7 +41,7 @@
         <!-- PASSWORD -->
         <div class="mb-5">
           <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-          <input  th:field="*{password}" type="text" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter your password" required />
+          <input  th:field="*{password}" type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter your password" required />
         </div>
 
         <!-- PHONE -->
@@ -49,6 +49,7 @@
           <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact Number</label>
           <input type="text" id="phone" th:field="*{phoneNumber}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter your phone number" required />
         </div>
+
 
         <!-- ABOUT -->
         <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Write something about yourself</label>
