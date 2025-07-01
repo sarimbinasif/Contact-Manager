@@ -25,36 +25,58 @@
       </p>
 
       <!-- FORM -->
-      <form data-th-action="@{'/do-signup'}" method="post"  enctype="multipart/form-data" data-th-object="${userForm}" class="mt-5">
+      <form data-th-action="@{'/do-signup'}" method="post"  enctype="multipart/form-data" data-th-object="${userForm}" class="mt-5"
+      novalidate>
         <!-- USERNAME -->
         <div class="mb-5">
           <label for="text" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
           <input type="text" id="name" th:field="*{name}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter your username" required />
+          <p 
+          th:if="${#fields.hasErrors('name')}" 
+          th:errors="*{name}" 
+          class="text-red-700 px-1 py-2 "></p>
         </div>
 
         <!-- EMAIL -->
         <div class="mb-5">
           <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
           <input type="email" id="email" th:field="*{email}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@gmail.com" required />
+          <p 
+          th:if="${#fields.hasErrors('email')}" 
+          th:errors="*{email}" 
+          class="text-red-700 px-1 py-2"></p>
         </div>
 
         <!-- PASSWORD -->
         <div class="mb-5">
           <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
           <input  th:field="*{password}" type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter your password" required />
+            <p 
+          th:if="${#fields.hasErrors('password')}" 
+          th:errors="*{password}" 
+          class="text-red-700 px-1 py-2"></p>
         </div>
 
         <!-- PHONE -->
         <div class="mb-5">
           <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact Number</label>
           <input type="text" id="phone" th:field="*{phoneNumber}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter your phone number" required />
+            <p 
+          th:if="${#fields.hasErrors('phoneNumber')}" 
+          th:errors="*{phoneNumber}" 
+          class="text-red-700 px-1 py-2"></p>
         </div>
 
 
         <!-- ABOUT -->
+          <div class="mb-5">
         <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Write something about yourself</label>
         <textarea id="message" rows="4" th:field="*{about}" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
-
+             <p 
+          th:if="${#fields.hasErrors('about')}" 
+          th:errors="*{about}" 
+          class="text-red-700 px-1 py-2"></p>
+        </div>
         <!-- PROFILE PIC -->
 <div class="mt-7 mb-5">
   <label for="profilePic" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Profile Picture</label>

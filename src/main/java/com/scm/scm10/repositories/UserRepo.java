@@ -16,11 +16,11 @@ import com.scm.scm10.entities.User;
 
 
 
-import java.util.Optional;
+// import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-import com.scm.scm10.entities.User;
+// import org.springframework.stereotype.Repository;
+// import com.scm.scm10.entities.User;
 
 @Repository
 public interface UserRepo extends JpaRepository<User, String> {

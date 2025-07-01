@@ -6,6 +6,7 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,6 +19,7 @@ import com.scm.scm10.services.UserService;
 
 import ch.qos.logback.core.joran.spi.HttpUtil.RequestMethod;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -45,10 +47,6 @@ public class PageController {
      @RequestMapping("/about")
     public String about(Model model){
         System.out.println("in about page controller");
-
-        //sending data to view
-        // model.addAttribute("githubrepo", "https://github.com/sarimbinasif");
-
         return "about";
     }
 
@@ -56,20 +54,12 @@ public class PageController {
      @RequestMapping("/services")
     public String services(Model model){
         System.out.println("in services page controller");
-
-        //sending data to view
-        // model.addAttribute("githubrepo", "https://github.com/sarimbinasif");
-
         return "services";
     }
 
      @RequestMapping("/contact")
     public String contact(Model model){
         System.out.println("in contact page controller");
-
-        //sending data to view
-        // model.addAttribute("githubrepo", "https://github.com/sarimbinasif");
-
         return "contact";
     }
 
@@ -78,8 +68,6 @@ public class PageController {
     public String login(Model model){
         System.out.println("in login page controller");
 
-        //sending data to view
-        // model.addAttribute("githubrepo", "https://github.com/sarimbinasif");
 
         return "login";
     }
@@ -98,10 +86,6 @@ public class PageController {
         userform.setAbout("Aspiring full-stack developer with a passion for building web applications.");
         model.addAttribute("userForm", userform);
         
-
-        // model.addAttribute("githubrepo", "https://github.com/sarimbinasif");
-
-
         return "signup";
 
     }
@@ -134,11 +118,15 @@ public class PageController {
 // }
 
     @PostMapping("/do-signup")
-public String processSignup(@ModelAttribute UserForm userForm,HttpSession session,
+public String processSignup(@Valid @ModelAttribute UserForm userForm,BindingResult rBindingResult,HttpSession session,
                             @RequestParam("profilePic") MultipartFile file) {
     System.out.println("in process signup function");
-    // System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
     // System.out.println(userForm);
+
+    if(rBindingResult.hasErrors())
+    {
+        return"signup";
+    }
 
     String profilePicPath;
 
@@ -168,22 +156,13 @@ public String processSignup(@ModelAttribute UserForm userForm,HttpSession sessio
     }
     
 
-    // User user = User.builder()
-    //         .name(userForm.getName())
-    //         .email(userForm.getEmail())
-    //         .about(userForm.getAbout())
-    //         .password(userForm.getPassword())
-    //         .phoneNumber(userForm.getPhoneNumber())
-    //         .profilePic(profilePicPath)
-    //         .build();
-
-   User user = new User();
-user.setName(userForm.getName());
-user.setEmail(userForm.getEmail());
-user.setPassword(userForm.getPassword());
-user.setAbout(userForm.getAbout());
-user.setPhoneNumber(userForm.getPhoneNumber());
-user.setProfilePic(profilePicPath);
+    User user = new User();
+    user.setName(userForm.getName());
+    user.setEmail(userForm.getEmail());
+    user.setPassword(userForm.getPassword());
+    user.setAbout(userForm.getAbout());
+    user.setPhoneNumber(userForm.getPhoneNumber());
+    user.setProfilePic(profilePicPath);
 
     User savedUser = userService.saveUser(user);
     System.out.println(savedUser);
@@ -193,8 +172,5 @@ user.setProfilePic(profilePicPath);
 
     return "redirect:/signup"; // or wherever you want to go after signup
 }
-
-
-
 
 }

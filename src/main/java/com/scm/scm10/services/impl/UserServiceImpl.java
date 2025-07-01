@@ -10,9 +10,11 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.scm.scm10.entities.User;
+import com.scm.scm10.helpers.AppConstants;
 import com.scm.scm10.helpers.ResourceNotFoundException;
 import com.scm.scm10.repositories.UserRepo;
 import com.scm.scm10.services.UserService;
@@ -22,6 +24,10 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     private UserRepo userRepo;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -33,6 +39,11 @@ public class UserServiceImpl implements UserService{
         String userid = UUID.randomUUID().toString();
         user.setUserId(userid);
 
+
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+
+    user.setRoleList(List.of(AppConstants.ROLE_USER));
         // encode password then save        
         // return userRepo.saveUser(user); [incorrect previous]
         return userRepo.save(user); // [correct way]
@@ -56,7 +67,7 @@ public class UserServiceImpl implements UserService{
         user2.setProfilePic(user.getProfilePic());
         user2.setEnabled(user.isEnabled());
         user2.setEmailverified(user.isEmailverified());
-        user2.setPhoneVerfied(user.isPhoneVerfied());
+        user2.setPhoneVerified(user.isPhoneVerified());
         user2.setProvider(user.getProvider());
         user2.setProviderUserId(user.getProviderUserId());
         
