@@ -15,7 +15,7 @@ import jakarta.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.scm.scm10.entities.User;
+// import com.scm.scm10.entities.User;
 
 @Entity
 public class Contact {
