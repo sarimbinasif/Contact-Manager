@@ -13,7 +13,6 @@
   <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 
   <div id="content" class="pt-20 flex justify-center px-4 sm:px-6 lg:px-8">
-    <!-- <div class="w-full max-w-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 p-6"> -->
       <div class="w-full max-w-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 border-t-4 border-t-blue-500 rounded-lg shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 p-6">
       <div th:replace="~{navbar :: navbar}"></div>
         <div th:replace="~{message :: messagebox}"></div>
@@ -40,7 +39,7 @@
         <!-- EMAIL -->
         <div class="mb-5">
           <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-          <input type="email" id="email" th:field="*{email}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@gmail.com" required />
+          <input type="email" id="email" th:field="*{email}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@gmail.com" required/>
           <p 
           th:if="${#fields.hasErrors('email')}" 
           th:errors="*{email}" 
@@ -77,15 +76,7 @@
           th:errors="*{about}" 
           class="text-red-700 px-1 py-2"></p>
         </div>
-        <!-- PROFILE PIC -->
-<div class="mt-7 mb-5">
-  <label for="profilePic" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Profile Picture</label>
-  <input type="file" id="profilePic" name="profilePic"
-         class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-         accept="image/*" required />
-</div>
-
-
+      
         <!-- BUTTONS -->
         <div class="mt-7 mb-3 flex justify-center space-x-4">
           <!-- Submit -->

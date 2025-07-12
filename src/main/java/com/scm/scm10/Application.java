@@ -15,6 +15,11 @@ public class Application {
         System.setProperty("GOOGLE_CLIENT_SECRET", dotenv.get("GOOGLE_CLIENT_SECRET"));
         System.setProperty("GITHUB_CLIENT_ID", dotenv.get("GITHUB_CLIENT_ID"));
         System.setProperty("GITHUB_CLIENT_SECRET", dotenv.get("GITHUB_CLIENT_SECRET"));
+
+        System.setProperty("cloudinary.cloud_name", dotenv.get("CLOUDINARY_CLOUD_NAME"));
+        System.setProperty("cloudinary.api_key", dotenv.get("CLOUDINARY_API_KEY"));
+        System.setProperty("cloudinary.api_secret", dotenv.get("CLOUDINARY_API_SECRET"));
+
 		SpringApplication.run(Application.class, args);
 	}
 

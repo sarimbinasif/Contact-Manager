@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}">
+
+<head>
+  <title data-th-text="${loggedInUser.name}+' | Add Contact'">Add Contact Page</title>
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-M9a1bYLChtdsh8SvuZdiCDNfRYCNzy8YbC3lwi7k7P+3MwWhqqhKJqOwDVL9d6T/7rV9PhmuJFlkR7cDfpXj1w=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+
+  <!-- Flowbite CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div id="content" class="min-h-screen dark:bg-gray-900">
+
+    <div th:if="${loggedInUser}">
+      <div data-th-replace="~{user/sidebar :: sidebar}"></div>
+    </div>
+
+    <div class="md:pl-64 pt-20 min-h-screen bg-gray-50 dark:bg-gray-900 transition-all duration-300">
+      <div class="flex justify-center">
+        <div class="w-full max-w-xl p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+           <div data-th-replace="message::messagebox"></div>
+          <h1 class="text-2xl font-semibold text-gray-800 dark:text-white mb-2">Add New Contact</h1>
+          <p class="text-gray-500 dark:text-gray-300 mb-4">
+            This contact will be stored on the cloud. You can directly email this client from SCM...
+          </p>
+
+          <!-- Form -->
+          <form data-thaction="@{/user/contacts/add}" data-th-object="${contactForm}" method="post" enctype="multipart/form-data" class="mt-8">
+            <!-- Contact Name -->
+            <div class="mb-3">
+              <label for="contact-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact Name</label>
+              <div class="relative mb-6">
+                <div class="absolute inset-y-0 left-0 flex items-center ps-3.5 pointer-events-none">
+                  <i class="fa-solid fa-user text-gray-400"></i>
+                </div>
+                <input id="contact-name" type="text" data-th-field="*{name}"
+                  class="ps-10 p-2.5 w-full text-sm rounded-lg border bg-gray-50 text-gray-900 border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="John Doe" />
+              </div>
+              <p class="text-red-500" data-th-if="${#fields.hasErrors('name')}" data-th-errors="*{name}">Invalid Name</p>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label for="contact-email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact Email</label>
+              <div class="relative mb-6">
+                <div class="absolute inset-y-0 left-0 flex items-center ps-3.5 pointer-events-none">
+                  <i class="fa-solid fa-envelope text-gray-400"></i>
+                </div>
+                <input id="contact-email" type="text" data-th-field="*{email}"
+                  class="ps-10 p-2.5 w-full text-sm rounded-lg border bg-gray-50 text-gray-900 border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="abc@example.com" />
+              </div>
+              <p class="text-red-500" data-th-if="${#fields.hasErrors('email')}" data-th-errors="*{email}">Invalid Email</p>
+            </div>
+
+            <!-- Phone -->
+            <div class="mb-3">
+              <label for="contact-phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact Phone</label>
+              <div class="relative mb-6">
+                <div class="absolute inset-y-0 left-0 flex items-center ps-3.5 pointer-events-none">
+                  <i class="fa-solid fa-phone text-gray-400"></i>
+                </div>
+                <input id="contact-phone" type="text" data-th-field="*{phoneNumber}"
+                  class="ps-10 p-2.5 w-full text-sm rounded-lg border bg-gray-50 text-gray-900 border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="9823525525" />
+              </div>
+              <p class="text-red-500" data-th-if="${#fields.hasErrors('phoneNumber')}" data-th-errors="*{phoneNumber}">Invalid Phone</p>
+            </div>
+
+            <!-- Address -->
+            <div class="mb-3">
+              <label for="contact-address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact Address</label>
+              <textarea id="contact-address" data-th-field="*{address}" rows="3"
+                class="p-2.5 w-full text-sm rounded-lg border bg-gray-50 text-gray-900 border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Address of the contact"></textarea>
+              <p class="text-red-500" data-th-if="${#fields.hasErrors('address')}" data-th-errors="*{address}">Invalid Address</p>
+            </div>
+
+             <!--CONTACT DESCRIPTION  -->
+
+            <div class="mb-3">
+              <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact
+                Description</label>
+              <textarea 
+               data-th-field="*{description}"
+               name="description"
+              rows="4"
+                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Write about your contact"></textarea>
+                 <p
+                    class="text-red-500"
+                    data-th-if="${#fields.hasErrors('address')}"
+                    data-th-errors="*{address}"
+                  >
+                    Invalid Name
+                  </p>
+            </div>
+
+
+
+           
+              <!-- CONTACT SOCIAL LINKS -->
+            <div class="flex space-x-3 mb-3">
+              <div class="w-full">
+                <!-- website  link  -->
+                <div class="mb-3">
+                  <div class="relative mb-6">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <i class="fa-solid w-4 h-4 fa-earth-americas"></i>
+                    </div>
+                    <input
+                     data-th-field="*{websiteLink}"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="htt://learncodewithdurgesh.com/" />
+                  </div>
+                </div>
+              </div>
+              <div class="w-full">
+                <!-- linkedin  link  -->
+                <div class="mb-3">
+                  <div class="relative mb-6">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                      <i class="fa-brands w-4 h-4 fa-linkedin"></i>
+                    </div>
+                    <input 
+                    data-th-field="*{linkedInLink}"
+                    type="text"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="htt://learncodewithdurgesh.com/" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Contact Image -->
+            <div class="mb-3">
+              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact Image</label>
+              <input type="file" name="contactImage"  id="image_file_input" 
+                class="block w-full text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" />
+              <p class="text-red-500" data-th-if="${#fields.hasErrors('contactImage')}" data-th-errors="*{contactImage}">Invalid Image</p>
+              <img class="max-h-52 mx-auto rounded-lg shadow mt-3 hidden" id="upload_image_preview" />
+            </div>
+
+            <!-- Favorite Checkbox -->
+            <div class="flex items-center mb-6">
+              <input type="checkbox" data-th-field="*{favorite}" id="favorite-checkbox"
+                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600" />
+              <label for="favorite-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Mark as Favorite</label>
+            </div>
+
+           
+
+            <!-- BUTTON CLASS -->
+             <div class="button-container text-center">
+
+
+              <!-- Submit -->
+              <button type="submit"
+                class="relative inline-flex items-center justify-center p-0.5 text-base font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-blue-500 to-blue-700 group-hover:from-blue-600 group-hover:to-blue-800 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+                <span
+                  class="relative px-3 py-2 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
+                  Add Contact
+                </span>
+              </button>
+
+
+              <!-- Reset -->
+              <button type="reset"
+                class="relative inline-flex items-center justify-center p-0.5 text-base font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-400 to-red-600 group-hover:from-red-500 group-hover:to-red-700 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-red-200 dark:focus:ring-red-800">
+                <span
+                  class="relative px-3 py-2 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
+                  Reset
+                </span>
+              </button>
+              
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS: Flowbite -->
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+
+  <!-- JS: Image preview -->
+  <script>
+    const fileInput = document.getElementById("image_file_input");
+    const preview = document.getElementById("upload_image_preview");
+
+    fileInput.addEventListener("change", function () {
+      const file = this.files[0];
+      if (file) {
+        preview.src = URL.createObjectURL(file);
+        preview.classList.remove("hidden");
+      } else {
+        preview.classList.add("hidden");
+      }
+    });
+  </script>
+</body>
+
+</html>

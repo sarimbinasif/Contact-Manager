@@ -117,60 +117,97 @@ public class PageController {
 //     return "redirect:/login"; // or return view name like "signup-success"
 // }
 
-    @PostMapping("/do-signup")
-public String processSignup(@Valid @ModelAttribute UserForm userForm,BindingResult rBindingResult,HttpSession session,
-                            @RequestParam("profilePic") MultipartFile file) {
-    System.out.println("in process signup function");
-    // System.out.println(userForm);
+//     @PostMapping("/do-signup")
+// public String processSignup(@Valid @ModelAttribute UserForm userForm,BindingResult rBindingResult,HttpSession session,
+//                             @RequestParam("profilePic") MultipartFile file) {
+//     System.out.println("in process signup function");
+//     // System.out.println(userForm);
 
-    if(rBindingResult.hasErrors())
-    {
-        return"signup";
-    }
+//     if(rBindingResult.hasErrors())
+//     {
+//         return"signup";
+//     }
 
-    String profilePicPath;
+//     String profilePicPath;
 
                                 
-    if (!file.isEmpty()) {
-        try {
-            // Absolute path to the upload directory inside static folder
-            String uploadDir = new File("src/main/resources/static/images/uploads").getAbsolutePath();
+//     if (!file.isEmpty()) {
+//         try {
+//             // Absolute path to the upload directory inside static folder
+//             String uploadDir = new File("src/main/resources/static/images/uploads").getAbsolutePath();
 
-            // Ensure directory exists
-            File dir = new File(uploadDir);
-            if (!dir.exists()) dir.mkdirs();
+//             // Ensure directory exists
+//             File dir = new File(uploadDir);
+//             if (!dir.exists()) dir.mkdirs();
 
-            // Save file
-            File saveFile = new File(uploadDir + File.separator + file.getOriginalFilename());
-            file.transferTo(saveFile);
+//             // Save file
+//             File saveFile = new File(uploadDir + File.separator + file.getOriginalFilename());
+//             file.transferTo(saveFile);
 
-            // Set relative path to be stored in DB (used in Thymeleaf etc.)
-            profilePicPath = "/images/uploads/" + file.getOriginalFilename();
+//             // Set relative path to be stored in DB (used in Thymeleaf etc.)
+//             profilePicPath = "/images/uploads/" + file.getOriginalFilename();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-            profilePicPath = "/images/default-profile-pic.jpg"; // fallback
-        }
-    } else {
-        profilePicPath = "/images/default-profile-pic.jpg";
-    }
+//         } catch (IOException e) {
+//             e.printStackTrace();
+//             profilePicPath = "/images/default-profile-pic.jpg"; // fallback
+//         }
+//     } else {
+//         profilePicPath = "/images/default-profile-pic.jpg";
+//     }
     
 
+//     User user = new User();
+//     user.setName(userForm.getName());
+//     user.setEmail(userForm.getEmail());
+//     user.setPassword(userForm.getPassword());
+//     user.setAbout(userForm.getAbout());
+//     user.setPhoneNumber(userForm.getPhoneNumber());
+//     user.setProfilePic(profilePicPath);
+
+//     User savedUser = userService.saveUser(user);
+//     System.out.println(savedUser);
+//     Message message = Message.builder().content("Resgistration Succesful").type(MessageType.green).build();
+
+//     session.setAttribute("message", message);
+
+//     return "redirect:/signup"; // or wherever you want to go after signup
+// }
+
+
+@PostMapping("/do-signup")
+public String processSignup(@Valid @ModelAttribute UserForm userForm,
+                            BindingResult rBindingResult,
+                            HttpSession session) {
+    System.out.println("in process signup function");
+
+    if (rBindingResult.hasErrors()) {
+        return "signup";
+    }
+
+    // Create new User object from form data
     User user = new User();
     user.setName(userForm.getName());
     user.setEmail(userForm.getEmail());
     user.setPassword(userForm.getPassword());
     user.setAbout(userForm.getAbout());
     user.setPhoneNumber(userForm.getPhoneNumber());
-    user.setProfilePic(profilePicPath);
 
+    // Don't store profile picture — keep it null
+    user.setProfilePic(null);
+
+    // Save user
     User savedUser = userService.saveUser(user);
     System.out.println(savedUser);
-    Message message = Message.builder().content("Resgistration Succesful").type(MessageType.green).build();
+
+    // Set success message
+    Message message = Message.builder()
+            .content("Registration Successful")
+            .type(MessageType.green)
+            .build();
 
     session.setAttribute("message", message);
 
-    return "redirect:/signup"; // or wherever you want to go after signup
+    return "redirect:/signup";
 }
 
 }
