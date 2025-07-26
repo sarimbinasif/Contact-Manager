@@ -102,7 +102,7 @@ public class User implements UserDetails {
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roleList=new ArrayList<>();
 
-    @Override
+    // @Override
     // public Collection<? extends GrantedAuthority> getAuthorities() {
     //     // list of roles [user, admin]
     //     // collection of aurthorities
@@ -112,10 +112,21 @@ public class User implements UserDetails {
         
     //     return roles; 
     // }
+//     public Collection<? extends GrantedAuthority> getAuthorities() {
+//     return roleList.stream()
+//             .map(SimpleGrantedAuthority::new)
+//             .collect(Collectors.toList());
+// }
+
+ private String emailToken;
+
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-    return roleList.stream()
-            .map(SimpleGrantedAuthority::new)
-            .collect(Collectors.toList());
-}
+        // list of roles[USER,ADMIN]
+        // Collection of SimpGrantedAuthority[roles{ADMIN,USER}]
+        Collection<SimpleGrantedAuthority> roles = roleList.stream().map(role -> new SimpleGrantedAuthority(role))
+                .collect(Collectors.toList());
+        return roles;
+    }
 
 }

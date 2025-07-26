@@ -20,6 +20,13 @@ public class Application {
         System.setProperty("cloudinary.api_key", dotenv.get("CLOUDINARY_API_KEY"));
         System.setProperty("cloudinary.api_secret", dotenv.get("CLOUDINARY_API_SECRET"));
 
+        System.setProperty("EMAIL_HOST", dotenv.get("EMAIL_HOST"));
+        System.setProperty("EMAIL_PORT", dotenv.get("EMAIL_PORT"));
+        System.setProperty("EMAIL_USERNAME", dotenv.get("EMAIL_USERNAME"));
+        System.setProperty("EMAIL_PASSWORD", dotenv.get("EMAIL_PASSWORD"));
+        System.setProperty("EMAIL_PASSWORD", dotenv.get("EMAIL_PROTOCOL"));
+
+
 		SpringApplication.run(Application.class, args);
 	}
 

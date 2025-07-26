@@ -12,26 +12,44 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
-
   <link rel="stylesheet" th:href="@{/css/output.css}" />
   <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body class="dark:bg-gray-900 bg-gray-100 dark:text-white">
-  <!-- Navbar -->
+
+  <!-- Logged-in user layout -->
   <div th:if="${loggedInUser}">
-    <div th:replace="~{user/user_navbar :: user-navbar}"></div>
+    
+    <!-- Sidebar -->
+    <div th:replace="~{user/sidebar :: sidebar}"></div>
+
+    <!-- Wrapper for main content (navbar + page content) -->
+    <div class="pl-64">
+      
+      <!-- Navbar (fixed) -->
+      <div th:replace="~{user/user_navbar :: user-navbar}"></div>
+
+      <!-- Page content with top margin to offset navbar height -->
+      <div class="pt-16 px-4 pl-64">
+        <section th:replace="${content}"></section>
+      </div>
+
+    </div>
   </div>
+
+  <!-- Guest user layout -->
   <div th:unless="${loggedInUser}">
     <div th:replace="~{navbar :: navbar}"></div>
+    <div class="pt-16 px-4">
+      <section th:replace="${content}"></section>
+    </div>
   </div>
 
-  <!-- MAIN CONTENT -->
-  <section th:replace="${content}"></section>
-
-  <!-- JS -->
+  <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script th:src="@{/js/script.js}"></script>
   <th:block th:replace="${script} ?: ~{}"></th:block>
+
 </body>
 </html>

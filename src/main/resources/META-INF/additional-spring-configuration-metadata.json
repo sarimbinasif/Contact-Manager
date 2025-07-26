@@ -1,5 +1,12 @@
-{"properties": [{
-  "name": "cloudinary.api_key",
-  "type": "java.lang.String",
-  "description": "A description for 'cloudinary.api_key'"
-}]}
+{"properties": [
+  {
+    "name": "cloudinary.api_key",
+    "type": "java.lang.String",
+    "description": "A description for 'cloudinary.api_key'"
+  },
+  {
+    "name": "spring.mail.from",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.mail.from'"
+  }
+]}

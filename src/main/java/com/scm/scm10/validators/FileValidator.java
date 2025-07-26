@@ -24,7 +24,7 @@ public class FileValidator implements ConstraintValidator<ValidFile, MultipartFi
             // context.disableDefaultConstraintViolation();
             // context.buildConstraintViolationWithTemplate("File cannot be
             // empty").addConstraintViolation();
-            return false;
+            return true;
 
         }
 

@@ -19,6 +19,8 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 // import com.scm.scm10.entities.User;
 
 @Entity
@@ -46,6 +48,7 @@ public class Contact {
 
     // 1 contact is associated with one user 
     @ManyToOne
+    @JsonIgnore
     private User user;
     
     

@@ -191,7 +191,7 @@ public String processSignup(@Valid @ModelAttribute UserForm userForm,
     user.setPassword(userForm.getPassword());
     user.setAbout(userForm.getAbout());
     user.setPhoneNumber(userForm.getPhoneNumber());
-
+    user.setEnabled(false);
     // Don't store profile picture — keep it null
     user.setProfilePic(null);
 
