@@ -1,23 +1,18 @@
 package com.scm.scm10.config;
 
 import java.io.IOException;
-// import java.util.logging.Logger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
 import com.scm.scm10.entities.Providers;
-// import com.scm.scm10.helpers.AppConstants;
 
-// import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-// import lombok.val;
 
 import java.util.UUID;
 import java.util.List;
@@ -36,7 +31,7 @@ public class OAuthAuthenticationSuccessHandler implements AuthenticationSuccessH
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-                                        Authentication authentication) throws IOException {
+            Authentication authentication) throws IOException {
         OAuth2AuthenticationToken token = (OAuth2AuthenticationToken) authentication;
         DefaultOAuth2User oauthUser = (DefaultOAuth2User) authentication.getPrincipal();
 
@@ -58,8 +53,7 @@ public class OAuthAuthenticationSuccessHandler implements AuthenticationSuccessH
                 newUser.setProvider(Providers.GOOGLE);
                 newUser.setProfilePic(oauthUser.getAttribute("picture"));
                 newUser.setAbout("Signed in with Google");
-            } 
-            else if (registrationId.equals("github")) {
+            } else if (registrationId.equals("github")) {
                 newUser.setProvider(Providers.GITHUB);
                 newUser.setProfilePic(oauthUser.getAttribute("avatar_url"));
                 newUser.setAbout("Signed in with GitHub");
@@ -71,5 +65,3 @@ public class OAuthAuthenticationSuccessHandler implements AuthenticationSuccessH
         new DefaultRedirectStrategy().sendRedirect(request, response, "/user/profile");
     }
 }
-
-

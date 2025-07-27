@@ -1,7 +1,5 @@
 package com.scm.scm10.validators;
 
-// package com.scm.validators;
-
 import org.springframework.web.multipart.MultipartFile;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

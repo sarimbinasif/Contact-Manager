@@ -16,24 +16,23 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Component
-public class AuthFailureHandler implements AuthenticationFailureHandler{
+public class AuthFailureHandler implements AuthenticationFailureHandler {
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
             AuthenticationException exception) throws IOException, ServletException {
 
-                if(exception instanceof DisabledException){
-                    // user is disabled
-                    HttpSession session=request.getSession();
-                    session.setAttribute("message", Message.builder()
+        if (exception instanceof DisabledException) {
+            // user is disabled
+            HttpSession session = request.getSession();
+            session.setAttribute("message", Message.builder()
                     .content("User is disabled, Email for verification is sent")
                     .type(MessageType.red).build());
 
-                    response.sendRedirect("/login");
+            response.sendRedirect("/login");
 
-                }
-                else{
-                    response.sendRedirect("/login?error=true");
-                }
-    } 
+        } else {
+            response.sendRedirect("/login?error=true");
+        }
+    }
 }

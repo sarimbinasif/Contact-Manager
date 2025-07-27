@@ -1,17 +1,3 @@
-// package com.scm.scm10.helpers;
-
-// import org.springframework.stereotype.Component;
-// import org.springframework.web.context.request.RequestContextHolder;
-
-// @Component
-// public class SessionHelper {
-//     public static void removeMessage{
-//         HttpSession session=((ServeletRequestAttributr)RequestContextHolder.getRequestAttributes()).getRequest.getSession()
-//         .session.removeAttribute("messsage");
-//     }
-// }
-
-
 package com.scm.scm10.helpers;
 
 import jakarta.servlet.http.HttpSession;
@@ -25,8 +11,8 @@ public class SessionHelper {
 
     public static void removeMessage() {
         try {
-            ServletRequestAttributes attributes =
-                (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+            ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder
+                    .getRequestAttributes();
 
             if (attributes != null) {
                 HttpServletRequest request = attributes.getRequest();

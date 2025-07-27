@@ -1,6 +1,5 @@
 package com.scm.scm10.entities;
 
-// import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,7 +10,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-
 
 @Getter
 @Setter

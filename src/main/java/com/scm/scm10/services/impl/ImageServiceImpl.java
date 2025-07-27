@@ -12,20 +12,19 @@ import com.scm.scm10.helpers.AppConstants;
 import com.scm.scm10.services.ImageService;
 
 @Service
-public class ImageServiceImpl implements ImageService{
+public class ImageServiceImpl implements ImageService {
 
     private Cloudinary cloudinary;
 
-    public ImageServiceImpl(Cloudinary cloudinary){
+    public ImageServiceImpl(Cloudinary cloudinary) {
         this.cloudinary = cloudinary;
     }
-
 
     @Override
     public String uploadImage(MultipartFile contactImage, String filename) {
         // code for image upload to cloudinary/AWS S3
 
-        // code likhnaa hia jo image ko upload kar rha ho
+        // code likhnaa hai jo image ko upload kar rha ho
 
         try {
             byte[] data = new byte[contactImage.getInputStream().available()];
@@ -40,7 +39,7 @@ public class ImageServiceImpl implements ImageService{
         }
     }
 
-     @Override
+    @Override
     public String getUrlFromPublicId(String publicId) {
 
         return cloudinary

@@ -22,7 +22,7 @@ import com.scm.scm10.services.EmailService;
 import com.scm.scm10.services.UserService;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepo userRepo;
@@ -38,25 +38,22 @@ public class UserServiceImpl implements UserService{
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-
     @Override
     public User saveUser(User user) {
-        
+
         // generate user id before saving
         String userid = UUID.randomUUID().toString();
         user.setUserId(userid);
 
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-    user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-
-    user.setRoleList(List.of(AppConstants.ROLE_USER));
-        // encode password then save        
+        user.setRoleList(List.of(AppConstants.ROLE_USER));
+        // encode password then save
         // return userRepo.saveUser(user); [incorrect previous]
 
         String emailToken = UUID.randomUUID().toString();
         user.setEmailToken(emailToken);
-        User savedUser =  userRepo.save(user); // [correct way]
+        User savedUser = userRepo.save(user); // [correct way]
 
         String emailLink = helper.getLinkForEmailVerificatiton(emailToken);
 
@@ -73,7 +70,8 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Optional<User> updateUser(User user) {
-        User user2 = userRepo.findById(user.getUserId()).orElseThrow(()->new ResourceNotFoundException("User not found!"));
+        User user2 = userRepo.findById(user.getUserId())
+                .orElseThrow(() -> new ResourceNotFoundException("User not found!"));
         // update user2 from user
         user2.setName(user.getName());
         user2.setEmail(user.getEmail());
@@ -86,7 +84,7 @@ public class UserServiceImpl implements UserService{
         user2.setPhoneVerified(user.isPhoneVerified());
         user2.setProvider(user.getProvider());
         user2.setProviderUserId(user.getProviderUserId());
-        
+
         // save to DB
         User save = userRepo.save(user2);
         return Optional.ofNullable(save);
@@ -95,7 +93,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public void deleteUser(String id) {
         User user2 = userRepo.findById(id)
-        .orElseThrow(()->new ResourceNotFoundException("User not found!"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found!"));
 
         userRepo.delete(user2);
     }
@@ -103,7 +101,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public boolean isUserExist(String userId) {
         User user2 = userRepo.findById(userId).orElse(null);
-        return user2 !=null ? true : false;
+        return user2 != null ? true : false;
     }
 
     @Override
@@ -116,14 +114,14 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public List<User> getAllUsers() {    
+    public List<User> getAllUsers() {
         return userRepo.findAll();
     }
     // all methods impl here
 
     @Override
     public User getUserByEmail(String email) {
-       return userRepo.findByEmail(email).orElse(null);
+        return userRepo.findByEmail(email).orElse(null);
     }
-    
+
 }

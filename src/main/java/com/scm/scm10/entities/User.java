@@ -21,9 +21,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.*;
-// import java.util.stream.Collector;
 import java.util.stream.Collectors;
-// import java.util.stream.Collectors;
 
 @Entity(name = "user")
 @Table(name = "users") // by default table name was users this will change to users
@@ -53,7 +51,7 @@ public class User implements UserDetails {
     // for verfication
     @Getter(value = AccessLevel.NONE)
     private boolean enabled = true;
-    
+
     private boolean emailverified = false;
     private boolean phoneVerified = false;
 
@@ -66,12 +64,6 @@ public class User implements UserDetails {
     // cascade type all , means user delete pe sary contacts delete
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Contact> contacts = new ArrayList<>();
-
-
-    // public void setPhoneVerified(boolean phoneNumber2) {
-    //     // TODO Auto-generated method stub
-    //     throw new UnsupportedOperationException("Unimplemented method 'setPhoneVerified'");
-    // }
 
     // email id wahi hamare username
     @Override
@@ -100,25 +92,9 @@ public class User implements UserDetails {
     }
 
     @ElementCollection(fetch = FetchType.EAGER)
-    private List<String> roleList=new ArrayList<>();
+    private List<String> roleList = new ArrayList<>();
 
-    // @Override
-    // public Collection<? extends GrantedAuthority> getAuthorities() {
-    //     // list of roles [user, admin]
-    //     // collection of aurthorities
-    //     Collections<SimpleGrantedAuthority> roles=roleList.stream().map(role-> new 
-    //     SimpleGrantedAuthority(role)
-    //     ).collect(Collector.toList());
-        
-    //     return roles; 
-    // }
-//     public Collection<? extends GrantedAuthority> getAuthorities() {
-//     return roleList.stream()
-//             .map(SimpleGrantedAuthority::new)
-//             .collect(Collectors.toList());
-// }
-
- private String emailToken;
+    private String emailToken;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -1,12 +1,8 @@
 package com.scm.scm10.config;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-
-// import lombok.Value;
 import org.springframework.beans.factory.annotation.Value;
 
 @Configuration

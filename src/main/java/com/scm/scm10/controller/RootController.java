@@ -23,7 +23,9 @@ public class RootController {
     @ModelAttribute
     public void addLoggedInUSerInfo(Model model, Authentication authentication) {
 
-        if(authentication==null){ return ;}
+        if (authentication == null) {
+            return;
+        }
         // principal will give all details of logged in user
         String username = Helper.getEmailOfLoggedInUser(authentication);
 

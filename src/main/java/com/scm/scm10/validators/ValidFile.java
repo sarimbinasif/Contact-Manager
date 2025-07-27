@@ -1,7 +1,5 @@
 package com.scm.scm10.validators;
 
-// package com.scm.validators;
-
 import java.lang.annotation.*;
 
 import jakarta.validation.Constraint;
